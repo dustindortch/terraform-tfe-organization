@@ -33,13 +33,13 @@ variable "send_passing_statuses_for_untriggered_speculative_plans" {
 }
 
 variable "session_remember_minutes" {
-  default     = 21600
+  default     = 20160
   description = "Session expiration in minutes"
   type        = number
 }
 
 variable "session_timeout_minutes" {
-  default     = 21600
+  default     = 20160
   description = "Session timeout after inactivity in minutes"
   type        = number
 }
