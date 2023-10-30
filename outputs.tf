@@ -3,14 +3,9 @@ output "id" {
   value       = tfe_organization.org.id
 }
 
-output "usernames" {
-  description = "Usernames of organization members"
-  value       = tfe_organization_membership.members[*].username
-}
-
-output "user_ids" {
-  description = "User IDs of organization members"
-  value       = tfe_organization_membership.members[*].user_id
+output "members" {
+  description = "Organization members"
+  value       = tfe_organization_membership.members
 }
 
 output "token" {

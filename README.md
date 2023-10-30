@@ -59,7 +59,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_id"></a> [id](#output\_id) | The name of the organization |
+| <a name="output_members"></a> [members](#output\_members) | Organization members |
 | <a name="output_token"></a> [token](#output\_token) | Organizational token |
-| <a name="output_user_ids"></a> [user\_ids](#output\_user\_ids) | User IDs of organization members |
-| <a name="output_usernames"></a> [usernames](#output\_usernames) | Usernames of organization members |
 <!-- END_TF_DOCS -->
