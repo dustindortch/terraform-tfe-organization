@@ -44,6 +44,8 @@ resource "tfe_organization_token" "token" {
 }
 
 resource "tfe_admin_organization_settings" "admin" {
+  count = var.terraform_enterprise ? 1 : 0
+
   organization                          = tfe_organization.org.name
   access_beta_tools                     = var.access_beta_tools
   global_module_sharing                 = var.global_module_sharing

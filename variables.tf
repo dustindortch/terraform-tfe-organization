@@ -32,6 +32,12 @@ variable "send_passing_statuses_for_untriggered_speculative_plans" {
   type        = bool
 }
 
+variable "terraform_enterprise" {
+  default     = false
+  description = "Organization is Terraform Enterprise"
+  type        = bool
+}
+
 variable "session_remember_minutes" {
   default     = 20160
   description = "Session expiration in minutes"

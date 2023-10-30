@@ -52,6 +52,7 @@ No modules.
 | <a name="input_send_passing_statuses_for_untriggered_speculative_plans"></a> [send\_passing\_statuses\_for\_untriggered\_speculative\_plans](#input\_send\_passing\_statuses\_for\_untriggered\_speculative\_plans) | Whether to send passing statuses for untriggered speculative plans | `bool` | `false` | no |
 | <a name="input_session_remember_minutes"></a> [session\_remember\_minutes](#input\_session\_remember\_minutes) | Session expiration in minutes | `number` | `20160` | no |
 | <a name="input_session_timeout_minutes"></a> [session\_timeout\_minutes](#input\_session\_timeout\_minutes) | Session timeout after inactivity in minutes | `number` | `20160` | no |
+| <a name="input_terraform_enterprise"></a> [terraform\_enterprise](#input\_terraform\_enterprise) | Organization is Terraform Enterprise | `bool` | `false` | no |
 | <a name="input_workspace_limit"></a> [workspace\_limit](#input\_workspace\_limit) | The maximum number of workspaces allowed in the organization | `number` | `0` | no |
 
 ## Outputs
