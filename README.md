@@ -39,7 +39,7 @@ No modules.
 | <a name="input_access_beta_tools"></a> [access\_beta\_tools](#input\_access\_beta\_tools) | Whether to allow access to beta tools | `bool` | `false` | no |
 | <a name="input_allow_force_delete_workspaces"></a> [allow\_force\_delete\_workspaces](#input\_allow\_force\_delete\_workspaces) | Whether to allow force delete workspaces | `bool` | `false` | no |
 | <a name="input_assessments_enforced"></a> [assessments\_enforced](#input\_assessments\_enforced) | Whether to enforce policy checks for Terraform runs | `bool` | `false` | no |
-| <a name="input_collaborator_auth_policy"></a> [collaborator\_auth\_policy](#input\_collaborator\_auth\_policy) | Authentication policy (password or two\_factor\_mandatory) | `string` | `"password "` | no |
+| <a name="input_collaborator_auth_policy"></a> [collaborator\_auth\_policy](#input\_collaborator\_auth\_policy) | Authentication policy (password or two\_factor\_mandatory) | `string` | `"password"` | no |
 | <a name="input_cost_estimation_enabled"></a> [cost\_estimation\_enabled](#input\_cost\_estimation\_enabled) | Whether to allow cost estimation | `bool` | `false` | no |
 | <a name="input_email"></a> [email](#input\_email) | The admin email address of the organization | `string` | n/a | yes |
 | <a name="input_force_regenerate"></a> [force\_regenerate](#input\_force\_regenerate) | Forces new token generation | `bool` | `false` | no |

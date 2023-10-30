@@ -45,7 +45,7 @@ variable "session_timeout_minutes" {
 }
 
 variable "collaborator_auth_policy" {
-  default     = "password "
+  default     = "password"
   description = "Authentication policy (password or two_factor_mandatory)"
   type        = string
 
