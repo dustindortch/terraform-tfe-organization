@@ -113,3 +113,13 @@ variable "workspace_limit" {
     error_message = "value must be greater than or equal to 0"
   }
 }
+
+variable "agent_pools" {
+  default     = {}
+  description = "Agent pools to create in the organization"
+  type = map(object({
+    agents                = optional(list(string), [])
+    allowed_workspace_ids = optional(list(string), [])
+    organization_scoped   = optional(bool, false)
+  }))
+}

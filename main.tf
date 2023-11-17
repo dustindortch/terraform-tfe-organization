@@ -54,8 +54,72 @@ resource "tfe_admin_organization_settings" "admin" {
 
   lifecycle {
     precondition {
-      condition     = (var.global_module_sharing == false && length(var.module_sharing_consumer_organizations) == 0) || (var.global_module_sharing == true && length(var.module_sharing_consumer_organizations) >= 0)
+      condition = (
+        var.global_module_sharing == false &&
+        length(var.module_sharing_consumer_organizations) == 0
+        ) || (
+        var.global_module_sharing == true && length(var.module_sharing_consumer_organizations) >= 0
+      )
       error_message = "global_module_sharing must be true for module_sharing_consumer_organizations must be set"
     }
   }
+}
+
+resource "tfe_agent_pool" "pools" {
+  for_each = var.agent_pools
+
+  name                = each.key
+  organization        = tfe_organization.org.name
+  organization_scoped = each.value.organization_scoped
+}
+
+data "tfe_workspace_ids" "all" {
+  names        = ["*"]
+  organization = tfe_organization.org.name
+
+  lifecycle {
+    postcondition {
+      condition = alltrue(flatten([
+        for k, v in var.agent_pools : [
+          for id in v.allowed_workspace_ids :
+          contains(
+            values(self.ids),
+            id
+          )
+        ]
+      ]))
+      error_message = "Workspace not found for agent_pools.allowed_workspace_ids"
+    }
+  }
+}
+
+locals {
+  workspace_agent_pool_permissions = {
+    for k, v in var.agent_pools : k => v if v.organization_scoped == false
+  }
+}
+
+resource "tfe_agent_pool_allowed_workspaces" "pool-workspaces" {
+  for_each = local.workspace_agent_pool_permissions
+
+  agent_pool_id         = tfe_agent_pool.pools[each.key].id
+  allowed_workspace_ids = each.value.allowed_workspace_ids
+}
+
+locals {
+  agent_tokens = merge(flatten([
+    for k, v in var.agent_pools : {
+      for agent in v.agents : "${k}_${agent}" => {
+        agent_name    = agent
+        agent_pool_id = tfe_agent_pool.pools[k].id
+      }
+    }
+  ])...)
+}
+
+resource "tfe_agent_token" "tokens" {
+  for_each = local.agent_tokens
+
+  agent_pool_id = each.value.agent_pool_id
+  description   = each.value.agent_name
 }

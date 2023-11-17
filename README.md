@@ -2,6 +2,24 @@
 
 This module manages an organization in Terraform Cloud/Enterprise.
 
+## To Do
+
+Determine which resources in the TFE provider should be managed as part of this module:
+
+* [x] tfe_organization
+* [x] tfe_organization_membership
+* [x] tfe_organization_token
+* [x] tfe_admin_organization_settings (TFE only)
+* [x] tfe_agent_pool
+* [x] tfe_agent_pool_allowed_workspaces
+* [x] tfe_agent_token
+* [ ] tfe_sentinel_policy
+* [ ] tfe_terraform_version
+* [ ] [tfe_ssh_key](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/ssh-keys)
+* [ ] tfe_organization_module_sharing (TFE only)
+* [ ] tfe_saml_settings (TFE only)
+* [ ] tfe_oauth_client
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -27,16 +45,21 @@ No modules.
 | Name | Type |
 |------|------|
 | [tfe_admin_organization_settings.admin](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/admin_organization_settings) | resource |
+| [tfe_agent_pool.pools](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/agent_pool) | resource |
+| [tfe_agent_pool_allowed_workspaces.pool-workspaces](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/agent_pool_allowed_workspaces) | resource |
+| [tfe_agent_token.tokens](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/agent_token) | resource |
 | [tfe_organization.org](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization) | resource |
 | [tfe_organization_membership.members](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_membership) | resource |
 | [tfe_organization_token.token](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_token) | resource |
 | [time_rotating.time](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/rotating) | resource |
+| [tfe_workspace_ids.all](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/workspace_ids) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_beta_tools"></a> [access\_beta\_tools](#input\_access\_beta\_tools) | Whether to allow access to beta tools | `bool` | `false` | no |
+| <a name="input_agent_pools"></a> [agent\_pools](#input\_agent\_pools) | Agent pools to create in the organization | <pre>map(object({<br>    agents                = optional(list(string), [])<br>    allowed_workspace_ids = optional(list(string), [])<br>    organization_scoped   = optional(bool, false)<br>  }))</pre> | `{}` | no |
 | <a name="input_allow_force_delete_workspaces"></a> [allow\_force\_delete\_workspaces](#input\_allow\_force\_delete\_workspaces) | Whether to allow force delete workspaces | `bool` | `false` | no |
 | <a name="input_assessments_enforced"></a> [assessments\_enforced](#input\_assessments\_enforced) | Whether to enforce policy checks for Terraform runs | `bool` | `false` | no |
 | <a name="input_collaborator_auth_policy"></a> [collaborator\_auth\_policy](#input\_collaborator\_auth\_policy) | Authentication policy (password or two\_factor\_mandatory) | `string` | `"password"` | no |
@@ -59,7 +82,11 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_agent_pools"></a> [agent\_pools](#output\_agent\_pools) | self-hosted agent pools |
+| <a name="output_agent_tokens"></a> [agent\_tokens](#output\_agent\_tokens) | agent tokens |
+| <a name="output_all_workspace_ids"></a> [all\_workspace\_ids](#output\_all\_workspace\_ids) | value of all\_workspace\_ids |
 | <a name="output_id"></a> [id](#output\_id) | The name of the organization |
 | <a name="output_members"></a> [members](#output\_members) | Organization members |
 | <a name="output_token"></a> [token](#output\_token) | Organizational token |
+| <a name="output_workspaces"></a> [workspaces](#output\_workspaces) | Workspaces in the organization |
 <!-- END_TF_DOCS -->
