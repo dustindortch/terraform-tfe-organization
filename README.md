@@ -2,7 +2,7 @@
 
 This module manages an organization in Terraform Cloud/Enterprise.
 
-## To Do
+## Support Resources
 
 Determine which resources in the TFE provider should be managed as part of this module:
 
@@ -13,12 +13,14 @@ Determine which resources in the TFE provider should be managed as part of this 
 * [x] tfe_agent_pool
 * [x] tfe_agent_pool_allowed_workspaces
 * [x] tfe_agent_token
-* [ ] tfe_sentinel_policy
-* [ ] tfe_terraform_version
-* [ ] [tfe_ssh_key](https://developer.hashicorp.com/terraform/cloud-docs/api-docs/ssh-keys)
-* [ ] tfe_organization_module_sharing (TFE only)
-* [ ] tfe_saml_settings (TFE only)
-* [ ] tfe_oauth_client
+
+## Usage
+
+This module requires bootstrapping to manage it within TFC/TFE.  Start by running in local mode with state stored in TFC/TFE.  Config-driven importing should work, but I have had limited success with it in the bootstrapping process with remote execution.
+
+The easiest way for this to work is to start with a plain organization without any agent pools or tokens.  Once the organization is imported, run a plan and iterate on the root module inputs until the plan returns "No changes".  Then, run an apply and verify that the organization is configured as expected.
+
+Once this state is reached, the config can be changed to VCS-driven execution.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
